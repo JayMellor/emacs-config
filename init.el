@@ -119,19 +119,15 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  ; remove below?
-;  (when (file-directory-p "~/Documents/CulturBook/")
- ;   (setq projectile-project-search-path '("~/Documents/CulturBook/")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
 (use-package magit
-  ;:custom
+  :custom
   ;; diff in same window
-  ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  )
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package forge) ;; todo forge-pull
 
@@ -170,7 +166,8 @@
   :hook (org-mode . org-bullets-mode))
 
 (use-package smartparens
-  :hook (prog-mode . smartparens-strict-mode)
+  :hook ((prog-mode . smartparens-strict-mode)
+	 (slime-repl-mode . smartparens-strict-mode))
   :bind (("C-<right>" . sp-forward-slurp-sexp)
 	 ("C-<left>" . sp-forward-barf-sexp))
   :config (require 'smartparens-config))
@@ -203,13 +200,18 @@
   :config
   (setq typescript-indent-level 2))
 
+(use-package slime
+  :init
+  (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+  (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+   '(slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
  '(same-window-regexps nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
