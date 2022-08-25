@@ -30,6 +30,11 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
 		shell-mode-hook
@@ -102,7 +107,7 @@
   )
 
 (general-define-key
- "C-M-j" 'counsel-switch-buffer)
+ "C-x C-b" 'counsel-switch-buffer)
 
 ;; evil-mode
 
@@ -170,12 +175,27 @@
 	 ("C-<left>" . sp-forward-barf-sexp))
   :config (require 'smartparens-config))
 
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
+(use-package company
   :init
-  (setq lsp-keymap-prefix "C-c l") ; or C-l or s-l
-  :config
-  (lsp-enable-which-key-integration t))
+  (company-mode 1))
+
+(use-package lsp-mode
+  :commands lsp
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  ((python-mode . lsp)
+   (lsp-mode . lsp-enable-which-key-integration)))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
+
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -189,7 +209,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+   '(company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
  '(same-window-regexps nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -13,3 +13,7 @@ elpa
 melpa-stable
 archive-contents
 *.elc
+*.lsp*
+.cache
+transient
+*.sqlite
