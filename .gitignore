@@ -1,4 +1,5 @@
 .smex-items
+*~
 *~$
 places
 .recentf
@@ -8,7 +9,11 @@ projectile-bookmarks.eld
 projectile.cache
 auto-save-list
 backups
-melpa-stable
 elpa
+melpa-stable
 archive-contents
 *.elc
+*.lsp*
+.cache
+transient
+*.sqlite
