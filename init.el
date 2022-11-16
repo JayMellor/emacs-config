@@ -202,7 +202,8 @@
 
 (use-package slime
   :init
-  (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+  (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
+    (load (expand-file-name "~/.quicklisp/slime-helper.el")))
   (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
 
 (custom-set-variables
