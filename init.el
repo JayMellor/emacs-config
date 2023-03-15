@@ -7,6 +7,7 @@
   (tool-bar-mode -1)
   (tooltip-mode -1)
   (set-fringe-mode 10))
+(setq-default tab-width 4)
 
 
 ;; Initialise package sources
@@ -32,7 +33,7 @@
 
 (use-package exec-path-from-shell
   :init
-  (when (memq window-system '(mac ns x))
+  (when (display-graphic-p)
     (exec-path-from-shell-initialize)))
 
 ;; Disable line numbers for some modes
@@ -199,6 +200,14 @@
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
+
+(use-package go-mode
+  :bind (("C-c C-c" . gofmt))
+  :config
+  (add-hook 'before-save-hook 'gofmt-before-save))
+
+(use-package gorepl-mode
+  :hook (go-mode . gorepl-mode))
 
 (use-package slime
   :init
