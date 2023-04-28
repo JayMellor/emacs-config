@@ -7,8 +7,10 @@
   (tool-bar-mode -1)
   (tooltip-mode -1)
   (set-fringe-mode 10))
-(setq-default tab-width 4)
 
+(setq-default tab-width 4)
+;; (toggle-frame-maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Initialise package sources
 (require 'package)
@@ -107,8 +109,14 @@
   ;; add prefixes and definers here
   )
 
+(defun new-shell (buffer-name)
+  "Creates a new shell instance named BUFFER-NAME"
+  (interactive "sname: ")
+  (shell buffer-name))
+
 (general-define-key
- "C-x C-b" 'counsel-switch-buffer)
+ "C-x C-b" 'counsel-switch-buffer
+ "C-c s" 'new-shell)
 
 ;; evil-mode
 
@@ -123,7 +131,10 @@
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
-  :config (counsel-projectile-mode))
+  :config (counsel-projectile-mode)
+  :init
+  (setq counsel-projectile-switch-project-action
+		#'counsel-projectile-switch-project-action-find-file))
 
 (use-package magit
   :custom
