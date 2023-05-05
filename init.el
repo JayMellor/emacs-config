@@ -205,11 +205,18 @@
   :hook (org-mode . org-bullets-mode))
 
 (use-package smartparens
-  :hook ((prog-mode . smartparens-strict-mode)
-	 (slime-repl-mode . smartparens-strict-mode))
+  :hook ((lisp-mode . smartparens-strict-mode)
+		 (emacs-lisp-mode . smartparens-strict-mode)
+		 (slime-repl-mode . smartparens-strict-mode)
+		 (fundamental-mode . smartparens-strict-mode))
   :bind (("C-<right>" . sp-forward-slurp-sexp)
-	 ("C-<left>" . sp-forward-barf-sexp))
-  :config (require 'smartparens-config))
+		 ("C-<left>" . sp-forward-barf-sexp))
+  :config
+  (require 'smartparens-config)
+  ;; can't get these to work..
+  ;; (sp-local-pair 'prog-mode "<" ">" :actions nil)
+  ;; (sp-pair "<" nil :actions :rem)
+  )
 
 (use-package company
   :init
@@ -221,6 +228,9 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook
   ((python-mode . lsp)
+   (go-mode . lsp)
+   (typescript-mode . lsp)
+   (web-mode . lsp)
    (lsp-mode . lsp-enable-which-key-integration)))
 
 (use-package lsp-ui
@@ -241,17 +251,22 @@
 
 (use-package go-mode
   :bind (("C-c C-c" . gofmt))
+  :hook
+  (go-mode . smartparens-strict-mode)
   :config
   (add-hook 'before-save-hook 'gofmt-before-save))
 
-(use-package gorepl-mode
-  :hook (go-mode . gorepl-mode))
+(use-package web-mode
+  :mode "\\.tsx\\'"
+  :hook (web-mode . lsp-deferred)
+  :config
+  (setq web-mode-enable-auto-quoting nil))
 
-(use-package slime
-  :init
-  (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
-    (load (expand-file-name "~/.quicklisp/slime-helper.el")))
-  (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
+;; (use-package slime
+;;   :init
+;;   (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
+;;     (load (expand-file-name "~/.quicklisp/slime-helper.el")))
+;;   (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
