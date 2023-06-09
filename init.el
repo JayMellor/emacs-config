@@ -245,9 +245,7 @@
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2))
+  :hook (typescript-mode . lsp-deferred))
 
 (use-package go-mode
   :bind (("C-c C-c" . gofmt))
@@ -256,11 +254,29 @@
   :config
   (add-hook 'before-save-hook 'gofmt-before-save))
 
+(use-package add-node-modules-path
+  :custom
+  ;; Custom command to find the folder containing Prettier
+  (add-node-modules-path-command '("yarn bin prettier | rev | cut -d'/' -f2- | rev")))
+
+(use-package prettier-rc)
+
+(use-package prettier-js)
+
 (use-package web-mode
-  :mode "\\.tsx\\'"
-  :hook (web-mode . lsp-deferred)
+  :mode "\\.tsx?\\'"
+  :hook
+  (web-mode . lsp-deferred)
   :config
-  (setq web-mode-enable-auto-quoting nil))
+  (add-hook 'web-mode-hook #'prettier-rc)  
+  (setq web-mode-enable-auto-quoting nil)
+  (setq web-mode-enable-auto-indentation nil))
+
+;; This doesn't appear to work correctly inside :config
+(eval-after-load 'web-mode
+    '(progn
+       (add-hook 'web-mode-hook #'add-node-modules-path)
+       (add-hook 'web-mode-hook #'prettier-js-mode)))
 
 ;; (use-package slime
 ;;   :init
@@ -274,8 +290,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
- '(same-window-regexps nil))
+   '(prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+ '(same-window-regexps nil)
+ '(warning-suppress-types '((lsp-mode) (lsp-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
