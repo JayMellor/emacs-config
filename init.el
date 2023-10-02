@@ -47,17 +47,17 @@
 
 ;; Ivy for completions
 (use-package ivy
-;; enable to hide  :diminish
+  ;; enable to hide  :diminish
   :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 :map ivy-switch-buffer-map
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+		 :map ivy-minibuffer-map
+		 ("TAB" . ivy-alt-done)
+		 ("C-l" . ivy-alt-done)
+		 :map ivy-switch-buffer-map
+		 ("C-l" . ivy-done)
+		 ("C-d" . ivy-switch-buffer-kill)
+		 :map ivy-reverse-i-search-map
+		 ("C-k" . ivy-previous-line)
+		 ("C-d" . ivy-reverse-i-search-kill))
   :init
   (ivy-mode 1))
 
