@@ -233,8 +233,11 @@
   :commands lsp
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :custom
+  (lsp-file-watch-threshold nil)  
   :hook
-  ((python-mode . lsp)
+  (
+   ;; (python-mode . lsp)
    (go-mode . lsp)
    (typescript-mode . lsp)
    (web-mode . lsp)
@@ -243,11 +246,11 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
+;; (use-package lsp-pyright
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-pyright)
+;;                          (lsp))))
 
 
 (use-package typescript-mode
@@ -266,9 +269,14 @@
   ;; Custom command to find the folder containing Prettier
   (add-node-modules-path-command '("yarn bin prettier | rev | cut -d'/' -f2- | rev")))
 
-(use-package prettier-rc)
+(use-package prettier-rc
+  :config
+  (add-hook 'javascript-mode #'prettier-rc))
 
-(use-package prettier-js)
+(use-package prettier-js
+  :config
+  (add-hook 'javascript-mode #'add-node-modules-path)
+  (add-hook 'javascript-mode #'prettier-js-mode))
 
 (use-package web-mode
   :mode "\\.tsx?\\'"
