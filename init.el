@@ -1,13 +1,14 @@
 ;; Remove unnecessary defaults
 (setq inhibit-startup-message t)
-(menu-bar-mode -1) ; Disable menu bar
+(menu-bar-mode 1) ; set to -1 to disable
 (setq visible-bell t)
 (when (display-graphic-p)
-  (scroll-bar-mode -1)
+  (scroll-bar-mode 1) ; set to -1 to disable
   (tool-bar-mode -1)
   (tooltip-mode -1)
   (set-fringe-mode 10))
 
+(setq make-backup-files nil) ; stop creating ~ files
 (setq-default tab-width 4)
 ;; (toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -40,10 +41,11 @@
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-		shell-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+				shell-mode-hook
+				term-mode-hook
+				eshell-mode-hook))
+  (add-hook mode (lambda ()
+				   (display-line-numbers-mode 0))))
 
 ;; Ivy for completions
 (use-package ivy
@@ -69,7 +71,10 @@
 
 (use-package doom-themes
   :config
-  (load-theme 'doom-solarized-light t))
+  (load-theme
+   'doom-solarized-light
+   ;; 'doom-dark+
+   t))
 
 (use-package all-the-icons)
 
