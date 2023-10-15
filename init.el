@@ -44,8 +44,7 @@
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 						 ("org" . "https://orgmode.org/elpa/")
-						 ("elpa" . "https://elpa.gnu.org/packages/")
-						 ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+						 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -283,21 +282,3 @@
 
 (add-to-list 'load-path "~/.emacs.d/testmode/")
 (require 'testmode)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(all-the-icons company counsel-projectile doom-modeline doom-themes
-				   exec-path-from-shell general go-mode gorepl-mode
-				   helpful ivy-rich lsp-pyright lsp-ui magit
-				   multiple-cursors org-bullets rainbow-delimiters
-				   slime smartparens typescript-mode xterm-color))
- '(same-window-regexps nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
