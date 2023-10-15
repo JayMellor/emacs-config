@@ -158,8 +158,6 @@
   ;; diff in same window
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package forge) ;; todo forge-pull
-
 (use-package org
   :config
   (setq org-ellipsis " ."
