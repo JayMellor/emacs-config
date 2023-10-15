@@ -28,9 +28,9 @@
 ;; Initialise package sources
 (require 'package)
 
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+						 ("org" . "https://orgmode.org/elpa/")
+						 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -198,7 +198,9 @@
     (let ((org-confirm-babel-evaulate nil))
       (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'my/org-babel-tangle-config))) ; can this be done with require?
+(add-hook 'org-mode-hook
+		  (lambda ()
+			(add-hook 'after-save-hook #'my/org-babel-tangle-config))) ; can this be done with require?
 
 (use-package org-bullets
   :after org
@@ -250,8 +252,10 @@
 (use-package slime
   :init
   (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
-    (load (expand-file-name "~/.quicklisp/slime-helper.el")))
-  (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
+	(load (expand-file-name "~/.quicklisp/slime-helper.el")))
+  (setq inferior-lisp-program "/opt/homebrew/bin/sbcl")
+  ;; not needed - see C-c <RET>
+  :bind (("C-c m" . slime-macroexpand-1)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
