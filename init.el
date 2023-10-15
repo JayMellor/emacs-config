@@ -1,3 +1,15 @@
+;; To Fix Documents etc issues run the following:
+
+;; % cd /Applications/Emacs.app/Contents/MacOS
+;; % mv Emacs Emacs-orig
+;; % ln -s Emacs-x86_64-10_14 Emacs
+
+;; % rm bin
+;; % ln -s bin-x86_64-10_14 bin
+
+;; % rm libexec
+;; % ln -s libexec-x86_64-10_14 libexec
+
 ;; Remove unnecessary defaults
 (setq inhibit-startup-message t)
 (menu-bar-mode 1) ; set to -1 to disable
