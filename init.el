@@ -236,6 +236,15 @@
    (web-mode . lsp)
    (lsp-mode . lsp-enable-which-key-integration)))
 
+(use-package flycheck
+  :hook
+  ;; Loads golangci-lint after lsp
+  ((lsp-managed-mode .  (lambda ()
+				 (flycheck-add-next-checker 'lsp
+											'(warning . golangci-lint))))))
+
+(use-package dap-mode)
+
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
@@ -256,6 +265,12 @@
   (go-mode . smartparens-strict-mode)
   :config
   (add-hook 'before-save-hook 'gofmt-before-save))
+
+(use-package flycheck-golangci-lint
+  :custom
+  (flycheck-golangci-lint-fast t)
+  (flycheck-golangci-lint-config "~/Development/hofy2/.golangci.yml")
+  :hook (go-mode . flycheck-golangci-lint-setup))
 
 (use-package add-node-modules-path
   :custom
@@ -286,6 +301,9 @@
        (add-hook 'web-mode-hook #'add-node-modules-path)
        (add-hook 'web-mode-hook #'prettier-js-mode)))
 
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+
 ;; (use-package slime
 ;;   :init
 ;;   (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
@@ -298,7 +316,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+   '(flycheck-golangci-lint prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
  '(same-window-regexps nil)
  '(warning-suppress-types '((lsp-mode) (lsp-mode))))
 (custom-set-faces
