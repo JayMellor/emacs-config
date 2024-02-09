@@ -257,6 +257,8 @@
   ;; not needed - see C-c <RET>
   :bind (("C-c m" . slime-macroexpand-1)))
 
+(add-to-list 'load-path "~/.emacs.d/testmode/")
+(require 'testmode)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
