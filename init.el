@@ -154,9 +154,22 @@
 		#'counsel-projectile-switch-project-action-find-file))
 
 (use-package magit
+  :bind
+  ("C-c g" . magit-file-dispatch) ; instead change `magit-define-global-key-bindings' in later versions
   :custom
-  ;; diff in same window
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
+								 "diff in same window"))
+
+(use-package markdown-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+		 ("\\.mdx" . markdown-mode))
+  :hook
+  (markdown-mode-hook . (lambda ()
+						  (visual-line-mode 1)))
+  :config
+  (unbind-key "<backtab>" markdown-mode-map)  ; to remove awkward (markdown-cycle t) behaviour
+  :init
+  (setq markdown-command "markdown"))
 
 (use-package org
   :config
