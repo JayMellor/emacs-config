@@ -154,11 +154,10 @@
 		#'counsel-projectile-switch-project-action-find-file))
 
 (use-package magit
-  :bind
-  ("C-c g" . magit-file-dispatch) ; instead change `magit-define-global-key-bindings' in later versions
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
-								 "diff in same window"))
+								 "diff in same window")
+  (magit-define-global-key-bindings 'recommended))
 
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
