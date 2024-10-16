@@ -227,28 +227,38 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :custom
-  (lsp-file-watch-threshold nil)  
+  (lsp-file-watch-threshold nil)
+  (lsp-lens-place-position 'end-of-line)
+  (lsp-go-gopls-server-args  '("-remote=auto" "-rpc.trace")) ; rpc.tract increases logging?
+  :bind
+  (("C-c l a l" . lsp-avy-lens))
   :hook
-  (
-   ;; (python-mode . lsp)
-   (go-mode . lsp)
+  ((go-mode . lsp)
    (typescript-mode . lsp)
    (web-mode . lsp)
    (lsp-mode . lsp-enable-which-key-integration)))
 
+;; get the following in go files
+;; err: exit status 1: stderr: go: can't match module patterns using the vendor directory
+;;	(Use -mod=mod or -mod=readonly to bypass.)
+
 (use-package flycheck)
 
-(use-package dap-mode)
+(use-package dap-mode
+  :hook
+  (dap-stopped-hook . (lambda (arg)
+						(call-interactively #'dap-hydra)))
+  :config
+  (require 'dap-dlv-go)
+  (require 'dap-chrome)
+  ;; (dap-firefox-setup)
+  (dap-chrome-setup)
+  :custom
+  (dap-dlv-go-delve-path "/opt/homebrew/bin/dlv")
+  (dap-auto-configure-features '(sessions locals breakpoints tooltip)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode)
-
-;; (use-package lsp-pyright
-;;   :ensure t
-;;   :hook (python-mode . (lambda ()
-;;                          (require 'lsp-pyright)
-;;                          (lsp))))
-
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
@@ -302,7 +312,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+   '(go-mode vterm dap-dlv-go sqlite3 prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
  '(same-window-regexps nil)
  '(warning-suppress-types '((lsp-mode) (lsp-mode))))
 (custom-set-faces
