@@ -226,8 +226,15 @@
 
 (use-package lsp-mode
   :commands lsp
-  :init
-  (setq lsp-keymap-prefix "C-c l")
+  :bind-keymap ("C-c l" . lsp-command-map)
+  :bind
+  (:map lsp-command-map
+		("a l" . lsp-avy-lens))
+  :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-file-watch-threshold nil)
+  (lsp-lens-place-position 'end-of-line)
+  (lsp-go-gopls-server-args  '("-remote=auto" "-rpc.trace")) ; rpc.tract increases logging?
   :hook
   ((lsp-mode . lsp-enable-which-key-integration)
    (c-mode . lsp)))
