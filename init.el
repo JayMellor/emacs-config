@@ -233,11 +233,13 @@
   :hook (org-mode . org-bullets-mode))
 
 (use-package smartparens
-  :hook ((prog-mode . smartparens-strict-mode)
-		 (slime-repl-mode . smartparens-strict-mode))
+  :hook ((lisp-mode . smartparens-strict-mode)
+		 (emacs-lisp-mode . smartparens-strict-mode)
+		 (slime-repl-mode . smartparens-strict-mode)
+		 (fundamental-mode . smartparens-strict-mode)
+		 (prog-mode . smartparens-strict-mode))
   :bind (("C-<right>" . sp-forward-slurp-sexp)
-		 ("C-<left>" . sp-forward-barf-sexp))
-  :config (require 'smartparens-config))
+		 ("C-<left>" . sp-forward-barf-sexp)))
 
 (use-package company
   :init
