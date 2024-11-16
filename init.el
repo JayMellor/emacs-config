@@ -215,9 +215,9 @@
 
 (use-package smartparens
   :hook ((prog-mode . smartparens-strict-mode)
-	 (slime-repl-mode . smartparens-strict-mode))
+		 (slime-repl-mode . smartparens-strict-mode))
   :bind (("C-<right>" . sp-forward-slurp-sexp)
-	 ("C-<left>" . sp-forward-barf-sexp))
+		 ("C-<left>" . sp-forward-barf-sexp))
   :config (require 'smartparens-config))
 
 (use-package company
@@ -229,24 +229,11 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
-  ((python-mode . lsp)
-   (lsp-mode . lsp-enable-which-key-integration)))
+  ((lsp-mode . lsp-enable-which-key-integration)
+   (c-mode . lsp)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode)
-
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
-
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2))
 
 (use-package go-mode
   :bind (("C-c C-c" . gofmt))
@@ -272,8 +259,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
- '(same-window-regexps nil))
+   '(emacsql-sqlite elcord gorepl-mode go-mode projectile all-the-icons ivy exec-path-from-shell slime company company-mode  lsp-ui lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
+'(same-window-regexps nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
