@@ -234,7 +234,10 @@
   (lsp-keymap-prefix "C-c l")
   (lsp-file-watch-threshold nil)
   (lsp-lens-place-position 'end-of-line)
-  (lsp-go-gopls-server-args  '("-remote=auto" "-rpc.trace")) ; rpc.tract increases logging?
+  ;; from https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (gc-cons-threshold (* 1000 1000 8))
+  (read-process-output-max (* 1024 1024))
+  (lsp-clients-typescript-max-ts-server-memory 8192)
   :hook
   ((lsp-mode . lsp-enable-which-key-integration)
    (c-mode . lsp)))
