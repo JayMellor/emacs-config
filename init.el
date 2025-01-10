@@ -282,41 +282,27 @@
   :config
   (add-hook 'before-save-hook 'gofmt-before-save))
 
-(use-package add-node-modules-path
-  :custom
-  ;; Custom command to find the folder containing Prettier
-  (add-node-modules-path-command '("yarn bin prettier | rev | cut -d'/' -f2- | rev")))
+(use-package prettier-js)
 
-(use-package prettier-rc
-  :config
-  (add-hook 'javascript-mode #'prettier-rc))
+(use-package prettier-rc) ; Finds the closest package.json and uses path to call PRETTIER-JS
 
-(use-package prettier-js
-  :config
-  (add-hook 'javascript-mode #'add-node-modules-path)
-  (add-hook 'javascript-mode #'prettier-js-mode))
+(use-package js-json-mode
+  :ensure nil
+  :hook
+  (js-json-mode . prettier-rc)
+  (js-json-mode . prettier-rc-mode))
 
 (use-package web-mode
   :mode "\\.tsx?\\'"
   :mode "\\.jsx?\\'"
   :hook
   (web-mode . lsp-deferred)
-  :config
-  (add-hook 'web-mode-hook #'prettier-rc)  
-  (setq web-mode-enable-auto-quoting nil)
-  (setq web-mode-enable-auto-indentation nil))
-
-;; This doesn't appear to work correctly inside :config
-(eval-after-load 'web-mode
-    '(progn
-       (add-hook 'web-mode-hook #'add-node-modules-path)
-       (add-hook 'web-mode-hook #'prettier-js-mode)))
-
-;; (use-package slime
-;;   :init
-;;   (when (file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
-;;     (load (expand-file-name "~/.quicklisp/slime-helper.el")))
-;;   (setq inferior-lisp-program "/opt/homebrew/bin/sbcl"))
+  ;; Runs Prettier, but only if prettier exists in the closest package.json
+  (web-mode . prettier-rc)
+  (web-mode . prettier-rc-mode) ; minor mode runs prettier on save
+  :custom
+  (web-mode-enable-auto-quoting nil)
+  (web-mode-enable-auto-indentation nil))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
