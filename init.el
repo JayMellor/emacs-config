@@ -75,6 +75,11 @@
   :init
   (ivy-mode 1))
 
+(use-package multiple-cursors
+  :bind (("M-s-s" . mc/edit-lines)
+		 ("C->" . mc/mark-next-like-this)
+		 ("C-<" . mc/mark-previous-like-this)))
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
