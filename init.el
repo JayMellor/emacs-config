@@ -24,6 +24,8 @@
 (setq-default tab-width 4)
 ;; (toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(font . "Lucida Console"))
+(setq-default line-spacing 4)
 
 ;; Initialise package sources
 (require 'package)
