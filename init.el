@@ -25,7 +25,12 @@
 ;; (toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(font . "Lucida Console"))
+(set-frame-font "Lucida Console")
+;; Iosevka
+;; Go Mono
 (setq-default line-spacing 4)
+
+ ;; (setq debug-on-error nil)
 
 ;; Initialise package sources
 (require 'package)
