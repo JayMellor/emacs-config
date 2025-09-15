@@ -19,8 +19,9 @@
   (tool-bar-mode -1)
   (tooltip-mode -1)
   (set-fringe-mode 10))
-
+(recentf-mode 1)
 (setq make-backup-files nil) ; stop creating ~ files
+(setq history-length 25)
 (setq-default tab-width 4)
 ;; (toggle-frame-maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
