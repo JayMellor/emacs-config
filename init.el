@@ -30,6 +30,7 @@
 ;; Iosevka
 ;; Go Mono
 (setq-default line-spacing 4)
+(setq use-dialog-box nil)
 
 (setq custom-file (locate-user-emacs-file "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
