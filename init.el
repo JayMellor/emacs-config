@@ -158,6 +158,8 @@
   :config (projectile-mode)
   :bind-keymap
   ("C-c p" . projectile-command-map)
+  :custom
+  (projectile-enable-caching t)
   :init
   (setq projectile-switch-project-action #'projectile-dired))
 
@@ -247,9 +249,9 @@
   (lsp-file-watch-threshold nil)
   (lsp-lens-place-position 'end-of-line)
   ;; from https://emacs-lsp.github.io/lsp-mode/page/performance/
-  (gc-cons-threshold (* 1000 1000 8))
-  (read-process-output-max (* 1024 1024))
-  (lsp-clients-typescript-max-ts-server-memory 8192)
+  (gc-cons-threshold (* 1000 1000 800))
+  (read-process-output-max (* 2 1024 1024))
+  (lsp-clients-typescript-max-ts-server-memory (* 4 8192))
   :hook
   ((go-mode . lsp)
    (typescript-mode . lsp)

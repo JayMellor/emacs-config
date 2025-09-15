@@ -17,4 +17,11 @@ archive-contents
 .cache
 transient
 *.sqlite
+.DS_Store
 recentf
+.dap-breakpoints
+.extension/
+.mc-lists.el
+dap-ui-repl-go-history
+network-security.data
+projects
