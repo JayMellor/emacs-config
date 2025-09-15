@@ -165,6 +165,10 @@
   :config (projectile-mode)
   :bind-keymap
   ("C-c p" . projectile-command-map)
+  :custom
+  (projectile-enable-caching t)
+  ;; fix for ivy
+  (counsel-projectile-remove-current-project t)
   :init
   (setq projectile-switch-project-action #'projectile-dired))
 
