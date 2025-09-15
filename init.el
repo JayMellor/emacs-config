@@ -31,6 +31,9 @@
 ;; Go Mono
 (setq-default line-spacing 4)
 
+(setq custom-file (locate-user-emacs-file "custom-set-variables.el"))
+(load custom-file 'noerror 'nomessage)
+
  ;; (setq debug-on-error nil)
 
 ;; Initialise package sources
