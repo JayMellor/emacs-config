@@ -177,7 +177,9 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
 								 "diff in same window")
-  (magit-define-global-key-bindings 'recommended))
+  (magit-define-global-key-bindings 'recommended)
+  :bind
+  ("C-c f" . magit-file-dispatch))
 
 (use-package markdown-mode
   :mode (("README\\.md\\'" . gfm-mode)
