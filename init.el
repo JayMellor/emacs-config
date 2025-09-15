@@ -31,6 +31,9 @@
 ;; Go Mono
 (setq-default line-spacing 4)
 
+(setq custom-file (locate-user-emacs-file "custom-set-variables.el"))
+(load custom-file 'noerror 'nomessage)
+
  ;; (setq debug-on-error nil)
 
 ;; Initialise package sources
@@ -313,19 +316,3 @@
   :custom
   (web-mode-enable-auto-quoting nil)
   (web-mode-enable-auto-indentation nil))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(go-mode vterm dap-dlv-go sqlite3 prettier-rc add-node-modules-path prettier-js dap-mode web-mode realgud slime company company-mode lsp-pyright lsp-ui typescript-mode lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
- '(same-window-regexps nil)
- '(warning-suppress-types '((lsp-mode) (lsp-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
