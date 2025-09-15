@@ -31,6 +31,8 @@
 ;; Go Mono
 (setq-default line-spacing 4)
 (setq use-dialog-box nil)
+(global-auto-revert-mode 1)
+(setopt use-short-answers t)
 
 (setq custom-file (locate-user-emacs-file "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
