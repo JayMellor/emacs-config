@@ -36,8 +36,9 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+						 ("org" . "https://orgmode.org/elpa/")
+						 ("elpa" . "https://elpa.gnu.org/packages/")
+						 ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -52,6 +53,7 @@
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
+(use-package eat) ; needed to run eat-compile-terminfo
 
 (use-package exec-path-from-shell
   :init
