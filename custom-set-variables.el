@@ -4,7 +4,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(web-mode prettier-rc prettier-js go-mode typescript-mode lsp-ui dap-mode flycheck lsp-mode company smartparens org-bullets markdown-mode magit counsel-projectile projectile general helpful counsel ivy-rich which-key rainbow-delimiters all-the-icons add-node-modules-path)))
+   '(add-node-modules-path all-the-icons company counsel
+						   counsel-projectile dap-mode flycheck
+						   general go-mode helpful ivy-rich lsp-mode
+						   lsp-ui magit markdown-mode org-bullets
+						   prettier-js prettier-rc projectile
+						   rainbow-delimiters smartparens treesit
+						   typescript-mode web-mode which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
