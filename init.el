@@ -33,6 +33,7 @@
 (setq use-dialog-box nil)
 (global-auto-revert-mode 1)
 (setopt use-short-answers t)
+(setq epg-pinentry-mode 'loopback)
 
 (setq custom-file (locate-user-emacs-file "custom-set-variables.el"))
 (load custom-file 'noerror 'nomessage)
@@ -323,3 +324,9 @@
   :custom
   (web-mode-enable-auto-quoting nil)
   (web-mode-enable-auto-indentation nil))
+
+(use-package pg
+  :vc (:url "https://github.com/emarsden/pg-el/"))
+(use-package pgmacs
+  :vc (:url "https://github.com/emarsden/pgmacs/"))
+
