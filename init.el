@@ -259,8 +259,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(emacsql-sqlite elcord gorepl-mode go-mode projectile all-the-icons ivy exec-path-from-shell slime company company-mode  lsp-ui lsp-mode smartparens org-bullets forge magit counsel-projectile general doom-themes helpful ivy-rich which-key which-keys rainbow-delimiters use-package doom-modeline counsel command-log-mode))
-'(same-window-regexps nil))
+   '(all-the-icons company counsel-projectile doom-modeline doom-themes
+				   exec-path-from-shell general go-mode gorepl-mode
+				   helpful ivy-rich lsp-pyright lsp-ui magit
+				   multiple-cursors org-bullets rainbow-delimiters
+				   slime smartparens typescript-mode xterm-color))
+ '(same-window-regexps nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
